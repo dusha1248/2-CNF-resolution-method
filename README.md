@@ -1,1 +1,1 @@
-# 2-CNF-resolution-method
+# checking satisfiability of 2-CNF
