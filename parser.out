@@ -1,0 +1,237 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> NAME
+Rule 2     expression -> NOT NAME
+Rule 3     expression -> LEFT expression RIGHT
+Rule 4     expression -> expression AND expression
+Rule 5     expression -> two IMPLY two
+Rule 6     expression -> two OR two
+Rule 7     two -> NAME
+Rule 8     two -> NOT NAME
+
+Terminals, with rules where they appear
+
+AND                  : 4
+IMPLY                : 5
+LEFT                 : 3
+NAME                 : 1 2 7 8
+NOT                  : 2 8
+OR                   : 6
+RIGHT                : 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 3 4 4 0
+two                  : 5 5 6 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . NAME
+    (2) expression -> . NOT NAME
+    (3) expression -> . LEFT expression RIGHT
+    (4) expression -> . expression AND expression
+    (5) expression -> . two IMPLY two
+    (6) expression -> . two OR two
+    (7) two -> . NAME
+    (8) two -> . NOT NAME
+
+    NAME            shift and go to state 2
+    NOT             shift and go to state 3
+    LEFT            shift and go to state 4
+
+    expression                     shift and go to state 1
+    two                            shift and go to state 5
+
+state 1
+
+    (0) S' -> expression .
+    (4) expression -> expression . AND expression
+
+    AND             shift and go to state 6
+
+
+state 2
+
+    (1) expression -> NAME .
+    (7) two -> NAME .
+
+    AND             reduce using rule 1 (expression -> NAME .)
+    $end            reduce using rule 1 (expression -> NAME .)
+    RIGHT           reduce using rule 1 (expression -> NAME .)
+    IMPLY           reduce using rule 7 (two -> NAME .)
+    OR              reduce using rule 7 (two -> NAME .)
+
+
+state 3
+
+    (2) expression -> NOT . NAME
+    (8) two -> NOT . NAME
+
+    NAME            shift and go to state 7
+
+
+state 4
+
+    (3) expression -> LEFT . expression RIGHT
+    (1) expression -> . NAME
+    (2) expression -> . NOT NAME
+    (3) expression -> . LEFT expression RIGHT
+    (4) expression -> . expression AND expression
+    (5) expression -> . two IMPLY two
+    (6) expression -> . two OR two
+    (7) two -> . NAME
+    (8) two -> . NOT NAME
+
+    NAME            shift and go to state 2
+    NOT             shift and go to state 3
+    LEFT            shift and go to state 4
+
+    expression                     shift and go to state 8
+    two                            shift and go to state 5
+
+state 5
+
+    (5) expression -> two . IMPLY two
+    (6) expression -> two . OR two
+
+    IMPLY           shift and go to state 9
+    OR              shift and go to state 10
+
+
+state 6
+
+    (4) expression -> expression AND . expression
+    (1) expression -> . NAME
+    (2) expression -> . NOT NAME
+    (3) expression -> . LEFT expression RIGHT
+    (4) expression -> . expression AND expression
+    (5) expression -> . two IMPLY two
+    (6) expression -> . two OR two
+    (7) two -> . NAME
+    (8) two -> . NOT NAME
+
+    NAME            shift and go to state 2
+    NOT             shift and go to state 3
+    LEFT            shift and go to state 4
+
+    expression                     shift and go to state 11
+    two                            shift and go to state 5
+
+state 7
+
+    (2) expression -> NOT NAME .
+    (8) two -> NOT NAME .
+
+    AND             reduce using rule 2 (expression -> NOT NAME .)
+    $end            reduce using rule 2 (expression -> NOT NAME .)
+    RIGHT           reduce using rule 2 (expression -> NOT NAME .)
+    IMPLY           reduce using rule 8 (two -> NOT NAME .)
+    OR              reduce using rule 8 (two -> NOT NAME .)
+
+
+state 8
+
+    (3) expression -> LEFT expression . RIGHT
+    (4) expression -> expression . AND expression
+
+    RIGHT           shift and go to state 12
+    AND             shift and go to state 6
+
+
+state 9
+
+    (5) expression -> two IMPLY . two
+    (7) two -> . NAME
+    (8) two -> . NOT NAME
+
+    NAME            shift and go to state 14
+    NOT             shift and go to state 15
+
+    two                            shift and go to state 13
+
+state 10
+
+    (6) expression -> two OR . two
+    (7) two -> . NAME
+    (8) two -> . NOT NAME
+
+    NAME            shift and go to state 14
+    NOT             shift and go to state 15
+
+    two                            shift and go to state 16
+
+state 11
+
+    (4) expression -> expression AND expression .
+    (4) expression -> expression . AND expression
+
+  ! shift/reduce conflict for AND resolved as shift
+    $end            reduce using rule 4 (expression -> expression AND expression .)
+    RIGHT           reduce using rule 4 (expression -> expression AND expression .)
+    AND             shift and go to state 6
+
+  ! AND             [ reduce using rule 4 (expression -> expression AND expression .) ]
+
+
+state 12
+
+    (3) expression -> LEFT expression RIGHT .
+
+    AND             reduce using rule 3 (expression -> LEFT expression RIGHT .)
+    $end            reduce using rule 3 (expression -> LEFT expression RIGHT .)
+    RIGHT           reduce using rule 3 (expression -> LEFT expression RIGHT .)
+
+
+state 13
+
+    (5) expression -> two IMPLY two .
+
+    AND             reduce using rule 5 (expression -> two IMPLY two .)
+    $end            reduce using rule 5 (expression -> two IMPLY two .)
+    RIGHT           reduce using rule 5 (expression -> two IMPLY two .)
+
+
+state 14
+
+    (7) two -> NAME .
+
+    AND             reduce using rule 7 (two -> NAME .)
+    $end            reduce using rule 7 (two -> NAME .)
+    RIGHT           reduce using rule 7 (two -> NAME .)
+
+
+state 15
+
+    (8) two -> NOT . NAME
+
+    NAME            shift and go to state 17
+
+
+state 16
+
+    (6) expression -> two OR two .
+
+    AND             reduce using rule 6 (expression -> two OR two .)
+    $end            reduce using rule 6 (expression -> two OR two .)
+    RIGHT           reduce using rule 6 (expression -> two OR two .)
+
+
+state 17
+
+    (8) two -> NOT NAME .
+
+    AND             reduce using rule 8 (two -> NOT NAME .)
+    $end            reduce using rule 8 (two -> NOT NAME .)
+    RIGHT           reduce using rule 8 (two -> NOT NAME .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 11 resolved as shift
